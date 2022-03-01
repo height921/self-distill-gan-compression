@@ -238,3 +238,12 @@ def find_class_in_module(target_cls_name, module):
         exit(0)
 
     return cls
+
+def mkdir(path):
+    """create a single empty directory if it didn't exist
+
+    Parameters:
+        path (str) -- a single directory path
+    """
+    if not os.path.exists(path):
+        os.makedirs(path)
