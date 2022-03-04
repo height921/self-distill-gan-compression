@@ -25,6 +25,7 @@ class BaseOptions():
         parser.add_argument('--use_wandb', action='store_true', help='use wandb')
         parser.add_argument('--gpu_ids', type=str, default='0', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
         parser.add_argument('--checkpoints_dir', type=str, default='./checkpoints', help='models are saved here')
+        parser.add_argument('--log_dir', type=str, default='logs/distill',help='specify an experiment directory')
         # model parameters
         parser.add_argument('--model', type=str, default='cycle_gan', help='chooses which model to use. [cycle_gan | pix2pix | test | colorization]')
         parser.add_argument('--input_nc', type=int, default=3, help='# of input image channels: 3 for RGB and 1 for grayscale')
@@ -125,6 +126,7 @@ class BaseOptions():
 
         # set gpu ids
         str_ids = opt.gpu_ids.split(',')
+        print(str_ids)
         opt.gpu_ids = []
         for str_id in str_ids:
             id = int(str_id)

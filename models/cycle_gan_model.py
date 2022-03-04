@@ -244,7 +244,7 @@ class CycleGANModel(BaseModel):
         self.loss_G = self.loss_G_A + self.loss_G_B + self.loss_G_cycle_A + self.loss_G_cycle_B + self.loss_G_idt_A + self.loss_G_idt_B
         self.loss_G.backward()
 
-    def optimize_parameters(self, steps):
+    def optimize_parameters(self):
         """Calculate losses, gradients, and update network weights; called in every training iteration"""
         # forward
         self.forward()  # compute fake images and reconstruction images.

@@ -239,6 +239,7 @@ def find_class_in_module(target_cls_name, module):
 
     return cls
 
+
 def mkdir(path):
     """create a single empty directory if it didn't exist
 
@@ -247,3 +248,16 @@ def mkdir(path):
     """
     if not os.path.exists(path):
         os.makedirs(path)
+
+
+def mkdirs(paths):
+    """create empty directories if they don't exist
+
+    Parameters:
+        paths (str list) -- a list of directory paths
+    """
+    if isinstance(paths, list) and not isinstance(paths, str):
+        for path in paths:
+            mkdir(path)
+    else:
+        mkdir(paths)

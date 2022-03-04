@@ -146,7 +146,9 @@ def define_G(input_nc, output_nc, ngf, netG, norm='batch', dropout_rate=0,
         net = ResnetGenerator(input_nc, output_nc, ngf, norm_layer=norm_layer,
                               dropout_rate=dropout_rate, n_blocks=9)
     elif netG == 'mobile_resnet_9blocks':
-        from .modules.resnet_architecture.mobile_resnet_generator import MobileResnetGenerator
+        # from .modules.resnet_architecture.mobile_resnet_generator import MobileResnetGenerator
+        # 自蒸馏是下边这个
+        from .modules.resnet_architecture.mobile_resnet_generator_plus import MobileResnetGenerator
         net = MobileResnetGenerator(input_nc, output_nc, ngf=ngf, norm_layer=norm_layer,
                                     dropout_rate=dropout_rate, n_blocks=9)
     elif netG == 'mobile_deepest_resnet':
@@ -198,6 +200,9 @@ def define_D(input_nc, ndf, netD, n_layers_D=3, norm='batch', init_type='normal'
     elif netD == 'pixel':  # classify if each pixel is real or fake
         from models.modules.discriminators import PixelDiscriminator
         net = PixelDiscriminator(input_nc, ndf, norm_layer=norm_layer)
+    elif netD == 'basic':  # default PatchGAN classifier
+        from models.modules.discriminators import NLayerDiscriminator
+        net = NLayerDiscriminator(input_nc, ndf, n_layers=3, norm_layer=norm_layer)
     else:
         raise NotImplementedError('Discriminator model name [%s] is not recognized' % netD)
     return init_net(net, init_type, init_gain, gpu_ids)
